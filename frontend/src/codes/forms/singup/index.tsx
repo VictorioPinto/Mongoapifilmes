@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 export const SignUpForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [senha, setsenha] = useState("");
+  const [confirmsenha, setConfirmsenha] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export const SignUpForm = () => {
   const signUp = async (e: any) => {
     try {
       e.preventDefault();
-      if (confirmPassword == password) {
+      if (confirmsenha == senha) {
         const res = await fetch(`${apiUrl}/user/create`, {
           method: "POST",
           headers: {
@@ -26,7 +26,7 @@ export const SignUpForm = () => {
           body: JSON.stringify({
             name: name,
             email: email,
-            password: password,
+            senha: senha,
           }),
         });
 
@@ -40,8 +40,8 @@ export const SignUpForm = () => {
               user_id: data.user._id,
               user: name,
               email: email,
-              password: password,
-              stores: data.user.stores,
+              senha: senha,
+              filmes: data.user.filmes,
             })
           );
 
@@ -72,14 +72,14 @@ export const SignUpForm = () => {
         ></Input>
         <label>Senha</label>
         <Input
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
+          onChange={(e) => setsenha(e.target.value)}
+          type="senha"
           required
         ></Input>
         <label>Confirmar Senha</label>
         <Input
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          type="password"
+          onChange={(e) => setConfirmsenha(e.target.value)}
+          type="senha"
           required
         ></Input>
         <SubmitButton>Cadastrar</SubmitButton>
