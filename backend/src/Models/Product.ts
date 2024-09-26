@@ -33,10 +33,6 @@ const productScheme = new mongoose.Schema<IProduct>({
     type: [String],
     required: true,
   },
-  store: {
-    type: String,
-    required: true,
-  },
   image: {
     type: String,
     required: true,

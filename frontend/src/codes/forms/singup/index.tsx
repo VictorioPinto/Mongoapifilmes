@@ -73,13 +73,13 @@ export const SignUpForm = () => {
         <label>Senha</label>
         <Input
           onChange={(e) => setsenha(e.target.value)}
-          type="senha"
+          type="password"
           required
         ></Input>
         <label>Confirmar Senha</label>
         <Input
           onChange={(e) => setConfirmsenha(e.target.value)}
-          type="senha"
+          type="password"
           required
         ></Input>
         <SubmitButton>Cadastrar</SubmitButton>

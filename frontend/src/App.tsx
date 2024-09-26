@@ -1,11 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home } from "./pages/Home";
 import { useEffect } from "react";
-import { Sign } from "./pages/Sign";
-import { UserPage } from "./pages/UserPage";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, userSelector } from "./redux/user/slice";
 import { apiUrl } from "./url";
+import { Home } from "./pages/Home";
+import { SignIn } from "./pages/singin";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,22 +13,23 @@ function App() {
   useEffect(() => {
     const pathname = window.location.pathname;
 
-    if (pathname == "/") {
+    if (pathname === "/") {
       document.body.style.background = "#f8f4e4";
     }
   }, []);
 
   useEffect(() => {
-    if (logged) {
+    if (logged && user_id) {
       getUserInfo();
     }
-  }, [dispatch, logged]);
+  }, [logged, user_id]); // Added user_id as dependency
 
   const getUserInfo = async () => {
     try {
       const res = await fetch(`${apiUrl}/user/${user_id}`);
 
-      if (res.status == 200) {
+      if (res.ok) {
+        // Use res.ok for checking status
         const data = await res.json();
 
         dispatch(
@@ -37,26 +37,23 @@ function App() {
             user_id: data._id,
             user: data.name,
             email: data.email,
-            password: data.password,
-            stores: data.stores,
+            filmes: data.filmes,
+            // Avoid including sensitive info like password
           })
         );
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching user info:", error);
     }
   };
 
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/search" element={<Home />}></Route>
-          <Route path="/sign" element={<Sign />}></Route>
-          <Route path="/user" element={<UserPage />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/sign" element={<SignIn />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

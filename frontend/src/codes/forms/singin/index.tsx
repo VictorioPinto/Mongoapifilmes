@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser, userSelector } from "../../../redux/user/slice";
 import { useNavigate } from "react-router-dom";
 
-export const LoginForm = () => {
+export const SingInForm = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [senha, setsenha] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const LoginForm = () => {
         },
         body: JSON.stringify({
           email: email,
-          password: password,
+          senha: senha,
         }),
       });
 
@@ -38,8 +38,8 @@ export const LoginForm = () => {
             user_id: data.user._id,
             user: data.user.name,
             email: data.user.email,
-            password: data.user.password,
-            stores: data.user.stores,
+            senha: data.user.senha,
+            filmes: data.user.filmes,
           })
         );
 
@@ -63,8 +63,8 @@ export const LoginForm = () => {
         ></Input>
         <label>Senha</label>
         <Input
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
+          onChange={(e) => setsenha(e.target.value)}
+          type="senha"
           required
         ></Input>
 
