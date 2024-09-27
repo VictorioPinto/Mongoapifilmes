@@ -11,8 +11,6 @@ export const SignIn = () => {
   const { logged } = useSelector(userSelector);
   const navigate = useNavigate();
 
-  const [offset, setOffset] = useState(0);
-
   useEffect(() => {
     if (logged) {
       navigate("/home");

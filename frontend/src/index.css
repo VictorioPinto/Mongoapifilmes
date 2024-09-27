@@ -7,6 +7,23 @@
   transition: 0.3s;
   font-family: "Poppins", sans-serif;
   font-style: normal;
+  color: white;
+}
+:root {
+  --cinzaclaro: #262626;
+  --cinza: #1c1c1c; /* Definindo a cor com um nome */
+  --cinzaescuro: #161616;
+  --cinzaletra: #8c8c8c;
+  --azulrt: #10e4f9;
+  --branco: #ffffff;
+  --cinzaborder: #303030;
+  --preto: #050505;
+}
+#root {
+  border: 0;
+}
+div {
+  border: 1px solid var(--cinzaborder);
 }
 
 ul {
@@ -19,4 +36,7 @@ a {
 
 input {
   outline: none;
+}
+body {
+  background-color: var(--preto);
 }

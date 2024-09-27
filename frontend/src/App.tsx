@@ -1,10 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, userSelector } from "./redux/user/slice";
 import { apiUrl } from "./url";
 import { Home } from "./pages/Home";
 import { SignIn } from "./pages/singin";
+import CardFilmes from "./codes/components/Cardfilmes";
+import FilmesList from "./codes/components/FilmesList";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,7 +16,7 @@ function App() {
     const pathname = window.location.pathname;
 
     if (pathname === "/") {
-      document.body.style.background = "#f8f4e4";
+      document.body.style.background = "#050505";
     }
   }, []);
 
@@ -38,7 +40,6 @@ function App() {
             user: data.name,
             email: data.email,
             filmes: data.filmes,
-            // Avoid including sensitive info like password
           })
         );
       }
@@ -50,8 +51,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/home" element={<Home />} />
         <Route path="/" element={<SignIn />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
