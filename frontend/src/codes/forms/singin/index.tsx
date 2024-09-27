@@ -4,7 +4,6 @@ import { Form, Input, SubmitButton } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, userSelector } from "../../../redux/user/slice";
 import { useNavigate } from "react-router-dom";
-
 export const SingInForm = () => {
   const [email, setEmail] = useState("");
   const [senha, setsenha] = useState("");

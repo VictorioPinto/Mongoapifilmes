@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Form = styled.form`
   width: 50%;
   height: fit-content;
-  border-right: solid black 1px;
   display: flex;
   flex-direction: column;
   align-items: center;
