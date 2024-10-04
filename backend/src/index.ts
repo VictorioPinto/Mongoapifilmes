@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 import mongoose from "mongoose";
 import { ErrorHandler } from "./Middlewares/ErrorHandler";
+import { userRouter } from "./Routes/user.route";
 
 export const mongo = mongoose
   .connect(
@@ -24,6 +25,7 @@ export const mongo = mongoose
   .catch((e) => console.log(e));
 
 app.use(productRouter);
+app.use(userRouter);
 app.use(ErrorHandler);
 
 app.listen(3000, () => {

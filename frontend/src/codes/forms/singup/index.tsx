@@ -16,8 +16,10 @@ export const SignUpForm = () => {
 
   const signUp = async (e: any) => {
     try {
+      alert(name + email + senha);
       e.preventDefault();
       if (confirmsenha == senha) {
+        alert(apiUrl);
         const res = await fetch(`${apiUrl}/user/create`, {
           method: "POST",
           headers: {
@@ -29,6 +31,7 @@ export const SignUpForm = () => {
             senha: senha,
           }),
         });
+        console.log(res);
 
         const data = await res.json();
 
@@ -41,16 +44,17 @@ export const SignUpForm = () => {
               user: name,
               email: email,
               senha: senha,
-              filmes: data.user.filmes,
+              filmes: [],
             })
           );
 
-          navigate("/user");
+          navigate("/home");
         }
       } else {
         alert("Senhas não conferem");
       }
     } catch (error) {
+      alert(error);
       console.log(error);
     }
   };

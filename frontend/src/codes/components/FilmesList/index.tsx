@@ -42,9 +42,9 @@ const FilmesList: React.FC = () => {
       <FilmeList>
         {filmes.map((filme) => (
           <CardFilmes
-            key={filme.code}
-            nome={filme.name}
-            diretor={filme.director}
+            code={filme.code}
+            name={filme.name}
+            director={filme.director}
             sinopse={filme.sinopse}
             lancamento={filme.lancamento}
             rating={filme.rating}
