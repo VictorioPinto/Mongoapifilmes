@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IProduct } from "../../../models/Product";
 import CardFilmes from "../Cardfilmes";
-import { FilmeList, Titulolista } from "./style";
+import { BtnMais, CardVazio, FilmeList, Titulolista } from "./style";
 import { Titulo } from "../Cardfilmes/style";
 
 const API_KEY = "e36877275cfebad1307bd37590ff8d54   "; // Coloque sua chave API aqui
@@ -40,6 +40,9 @@ const FilmesList: React.FC = () => {
     <div>
       <Titulolista>Lista de Filmes</Titulolista>
       <FilmeList>
+        <CardVazio>
+          <BtnMais></BtnMais>
+        </CardVazio>
         {filmes.map((filme) => (
           <CardFilmes
             code={filme.code}

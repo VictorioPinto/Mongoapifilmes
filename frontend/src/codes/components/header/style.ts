@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderS = styled.div`
   width: 100%;
   height: 90px;
-  background: #4e3f30;
+  background: var(--cinza);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +16,7 @@ export const Title = styled.h1`
   & > a {
     outline: none;
     text-decoration: none;
-    color: #a5b3aa;
+    color: (--BRANCO);
   }
 `;
 
@@ -38,14 +38,14 @@ export const NavList = styled.ul`
   & > li {
     display: grid;
     place-items: center;
-    color: #a5b3aa;
+    color: (--BRANCO);
     cursor: pointer;
   }
 
   & > a {
     display: grid;
     place-items: center;
-    color: #a5b3aa;
+    color: (--BRANCO);
     cursor: pointer;
   }
 `;

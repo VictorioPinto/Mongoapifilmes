@@ -36,7 +36,6 @@ export class UserController {
     try {
       const user: IUser = req.body;
 
-      // Verificação básica de dados de entrada
       if (!user.name || !user.email || !user.senha) {
         return res.status(400).json({ message: "Dados incompletos!" });
       }
