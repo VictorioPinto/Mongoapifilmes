@@ -7,6 +7,7 @@ import { Home } from "./pages/Home";
 import { SignIn } from "./pages/singin";
 import CardFilmes from "./codes/components/Cardfilmes";
 import FilmesList from "./codes/components/FilmesList";
+import { CreateMoviePage } from "./pages/CreateMoviePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/create/movie" element={<CreateMoviePage />} />
       </Routes>
     </BrowserRouter>
   );

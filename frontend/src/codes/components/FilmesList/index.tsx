@@ -4,6 +4,7 @@ import CardFilmes from "../Cardfilmes";
 import { BtnMais, CardVazio, FilmeList, Titulolista } from "./style";
 import { Titulo } from "../Cardfilmes/style";
 import AddIcon from "../Icons/AddIcon";
+import { Link } from "react-router-dom";
 
 const API_KEY = "e36877275cfebad1307bd37590ff8d54";
 const API_URL = `https://api.themoviedb.org/3/discover/movie?language=pt-BR&api_key=${API_KEY}&page=`;
@@ -36,7 +37,7 @@ const FilmesList: React.FC = () => {
       const filmesPages: IProduct[] = [];
 
       // Buscar filmes de múltiplas páginas (por exemplo, 2 páginas)
-      for (let page = 1; page <= 2; page++) {
+      for (let page = 1; page <= 5; page++) {
         const filmesData = await fetchFilmes(page);
         filmesPages.push(...filmesData);
       }
@@ -52,8 +53,10 @@ const FilmesList: React.FC = () => {
       <Titulolista>Lista de Filmes</Titulolista>
       <FilmeList>
         <CardVazio>
-          <BtnMais>
+          <BtnMais >
+            <Link to="/create/movie">
             <AddIcon></AddIcon>
+            </Link>
           </BtnMais>
         </CardVazio>
         {filmes.map((filme) => (
