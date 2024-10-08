@@ -3,37 +3,48 @@ import { IProduct } from "../../../models/Product";
 import CardFilmes from "../Cardfilmes";
 import { BtnMais, CardVazio, FilmeList, Titulolista } from "./style";
 import { Titulo } from "../Cardfilmes/style";
+import AddIcon from "../Icons/AddIcon";
 
-const API_KEY = "e36877275cfebad1307bd37590ff8d54   "; // Coloque sua chave API aqui
-const API_URL = `https://api.themoviedb.org/3/discover/movie?language=pt-BR&api_key=${API_KEY}`;
-
+const API_KEY = "e36877275cfebad1307bd37590ff8d54";
+const API_URL = `https://api.themoviedb.org/3/discover/movie?language=pt-BR&api_key=${API_KEY}&page=`;
 const FilmesList: React.FC = () => {
   const [filmes, setFilmes] = useState<IProduct[]>([]);
 
+  const fetchFilmes = async (page: number) => {
+    try {
+      const response = await fetch(`${API_URL}${page}`);
+      const data = await response.json();
+      const filmesData: IProduct[] = data.results.map((filme: any) => ({
+        code: filme.id.toString(),
+        name: filme.title,
+        director: "Diretor não disponível",
+        sinopse: "Sinopse não disponível",
+        lancamento: new Date(filme.release_date),
+        rating: [filme.vote_average],
+        tags: filme.genre_ids.map((id: number) => id.toString()),
+        image: `https://image.tmdb.org/t/p/w500${filme.poster_path}`,
+      }));
+      return filmesData;
+    } catch (error) {
+      console.error("Erro ao buscar filmes:", error);
+      return [];
+    }
+  };
+
   useEffect(() => {
-    const fetchFilmes = async () => {
-      try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        const filmesData: IProduct[] = data.results
-          .slice(0, 20)
-          .map((filme: any) => ({
-            code: filme.id.toString(),
-            name: filme.title,
-            director: "Diretor não disponível", // Placeholder
-            sinopse: "Sinopse não disponível", // Placeholder
-            lancamento: new Date(filme.release_date),
-            rating: [filme.vote_average], // Usando o voto médio como um array
-            tags: filme.genre_ids.map((id: number) => id.toString()), // Pode mapear para nomes de gêneros
-            image: `https://image.tmdb.org/t/p/w500${filme.poster_path}`, // URL da imagem do filme
-          }));
-        setFilmes(filmesData);
-      } catch (error) {
-        console.error("Erro ao buscar filmes:", error);
+    const fetchAllFilmes = async () => {
+      const filmesPages: IProduct[] = [];
+
+      // Buscar filmes de múltiplas páginas (por exemplo, 2 páginas)
+      for (let page = 1; page <= 2; page++) {
+        const filmesData = await fetchFilmes(page);
+        filmesPages.push(...filmesData);
       }
+
+      setFilmes(filmesPages);
     };
 
-    fetchFilmes();
+    fetchAllFilmes();
   }, []);
 
   return (
@@ -41,10 +52,13 @@ const FilmesList: React.FC = () => {
       <Titulolista>Lista de Filmes</Titulolista>
       <FilmeList>
         <CardVazio>
-          <BtnMais></BtnMais>
+          <BtnMais>
+            <AddIcon></AddIcon>
+          </BtnMais>
         </CardVazio>
         {filmes.map((filme) => (
           <CardFilmes
+            key={filme.code}
             code={filme.code}
             name={filme.name}
             director={filme.director}

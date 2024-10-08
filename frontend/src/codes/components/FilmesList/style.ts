@@ -24,9 +24,12 @@ export const CardVazio = styled.div`
   padding: 1rem;
   margin: 1rem;
   max-width: 300px;
+  height: 31vh;
   text-align: center;
+  margin-top: 10%;
 `;
 export const BtnMais = styled.button`
   height: 100%;
   background-color: var(--cinzaescuro);
+  border: 0;
 `;
