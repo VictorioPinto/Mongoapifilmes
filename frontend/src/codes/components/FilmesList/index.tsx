@@ -10,6 +10,7 @@ const API_KEY = "e36877275cfebad1307bd37590ff8d54";
 const API_URL = `https://api.themoviedb.org/3/discover/movie?language=pt-BR&api_key=${API_KEY}&page=`;
 const FilmesList: React.FC = () => {
   const [filmes, setFilmes] = useState<IProduct[]>([]);
+  const [generos, setGeneros] = useState<{ [key: number]: string }>({});
 
   const fetchFilmes = async (page: number) => {
     try {
@@ -31,6 +32,29 @@ const FilmesList: React.FC = () => {
       return [];
     }
   };
+  const fetchGeneros = async () => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=pt-BR`
+      );
+      const data = await response.json();
+      const generosMap = data.genres.reduce((acc: any, genre: any) => {
+        acc[genre.id] = genre.name;
+        return acc;
+      }, {});
+      setGeneros(generosMap);
+    } catch (error) {
+      console.error("Erro ao buscar gêneros:", error);
+    }
+  };
+  useEffect(() => {
+    const fetchAllData = async () => {
+      await fetchGeneros();
+      // Chame a função de busca de filmes aqui
+    };
+
+    fetchAllData();
+  }, []);
 
   useEffect(() => {
     const fetchAllFilmes = async () => {
@@ -53,9 +77,9 @@ const FilmesList: React.FC = () => {
       <Titulolista>Lista de Filmes</Titulolista>
       <FilmeList>
         <CardVazio>
-          <BtnMais >
+          <BtnMais>
             <Link to="/create/movie">
-            <AddIcon></AddIcon>
+              <AddIcon></AddIcon>
             </Link>
           </BtnMais>
         </CardVazio>
@@ -69,6 +93,7 @@ const FilmesList: React.FC = () => {
             lancamento={filme.lancamento}
             rating={filme.rating}
             tags={filme.tags}
+            generos={generos}
             image={filme.image}
           />
         ))}

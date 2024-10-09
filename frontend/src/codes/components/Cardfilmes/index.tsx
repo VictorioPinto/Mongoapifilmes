@@ -1,3 +1,4 @@
+// CardFilmes.tsx
 import React from "react";
 import { IProduct } from "../../../models/Product";
 import {
@@ -8,6 +9,7 @@ import {
   CardLancamento,
   CardTags,
   Titulo,
+  Tag,
 } from "./style";
 
 interface CardFilmesProps
@@ -15,6 +17,7 @@ interface CardFilmesProps
   rating: number[];
   tags: string[];
   lancamento: Date;
+  generos: { [key: number]: string }; // Adicione esta linha
 }
 
 const CardFilmes: React.FC<CardFilmesProps> = ({
@@ -24,6 +27,7 @@ const CardFilmes: React.FC<CardFilmesProps> = ({
   rating,
   tags,
   image,
+  generos, // Adicione esta linha
 }) => {
   return (
     <CardFilme>
@@ -34,7 +38,12 @@ const CardFilmes: React.FC<CardFilmesProps> = ({
         Data de Lançamento: {lancamento.toLocaleDateString()}
       </CardLancamento>
       <CardAvaliacao>Avaliação: {rating.join(", ")}</CardAvaliacao>
-      <CardTags>Tags: {tags.join(", ")}</CardTags>
+      <CardTags>
+        Tags:{" "}
+        {tags.map((tagId) => (
+          <Tag key={tagId}>{generos[parseInt(tagId)]}</Tag>
+        ))}
+      </CardTags>
     </CardFilme>
   );
 };
