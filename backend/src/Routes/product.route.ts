@@ -16,7 +16,7 @@ productRouter.get("/getall", productController.getAllProducts);
 
 // Route to create a new product in a specific store
 productRouter.post(
-  "/product/create/:store_id",
+  "/product/create",
   productController.createProduct
 );
 

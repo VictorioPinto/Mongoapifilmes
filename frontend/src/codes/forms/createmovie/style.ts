@@ -15,21 +15,28 @@ export const Form = styled.form`
 `;
 
 export const Input = styled.input`
-  width: 100%;
+  width: 60%;
   outline: none;
   padding: 0.4rem;
   background: var(--cinzaclaro);
   border-radius: 1rem;
 `;
-
+export const InputSinopse = styled.textarea`
+  width: 60%;
+  height: 10vh;
+  outline: none;
+  padding: 0.4rem;
+  background: var(--cinzaclaro);
+  border-radius: 1rem;
+`;
 export const SubmitButton = styled.button`
-  width: 100%;
+  width: 20%;
   padding: 0.4rem;
   background: var(--azulrt);
   border-radius: 1rem;
   color: white;
   border: none;
-
+  margin-bottom: 5vh;
   &:hover {
     cursor: pointer;
   }
@@ -68,4 +75,31 @@ export const AddTagButton = styled.button`
 `;
 export const AddTags = styled.span`
   width: auto;
+`;
+export const Tags = styled.div`
+  max-width: 30vh;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--cinzaletra);
+  font-style: italic;
+  border: 0;
+`;
+export const InputRating = styled.input`
+  width: 10vh;
+  outline: none;
+  padding: 0.4rem;
+  background: var(--cinzaclaro);
+  border-radius: 1rem;
+`;
+export const InputDate = styled.input`
+  width: auto;
+  outline: none;
+  padding: 0.4rem;
+  background: var(--cinzaclaro);
+  border-radius: 1rem;
 `;

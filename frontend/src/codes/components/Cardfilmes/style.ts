@@ -47,10 +47,10 @@ export const CardImg = styled.img`
   max-width: 15vw;
 `;
 export const CardTags = styled.div`
-  // Estilos para a seção de tags
+
   display: flex;
   flex-wrap: wrap;
-  gap: 5px; // Espaçamento entre as tags
+  gap: 5px; 
   font-size: 0.9rem;
   margin: 0.5rem 0;
   align-items: center;
