@@ -10,6 +10,7 @@ const API_KEY = "e36877275cfebad1307bd37590ff8d54";
 const API_URL = `https://api.themoviedb.org/3/discover/movie?language=pt-BR&api_key=${API_KEY}&page=`;
 const FilmesList: React.FC = () => {
   const [filmes, setFilmes] = useState<IProduct[]>([]);
+  const [filmesdb, setFilmesdb] = useState<IProduct[]>([]);
   const [generos, setGeneros] = useState<{ [key: number]: string }>({});
 
   const fetchFilmes = async (page: number) => {
@@ -83,6 +84,22 @@ const FilmesList: React.FC = () => {
             </Link>
           </BtnMais>
         </CardVazio>
+        {filmesdb.map((filmedb) => (
+          <CardFilmes
+            key={filme.code}
+            code={filme.code}
+            name={filme.name}
+            director={filme.director}
+            sinopse={filme.sinopse}
+            lancamento={filme.lancamento}
+            rating={filme.rating}
+            tags={filme.tags}
+            generos={generos}
+            image={filme.image}
+          />
+        ))}
+      </FilmeList>
+      <FilmeList>
         {filmes.map((filme) => (
           <CardFilmes
             key={filme.code}

@@ -4,16 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { IProduct } from "../Interfaces/IProduct";
 
 const productScheme = new mongoose.Schema<IProduct>({
-  code: {
-    type: String,
-    default: uuidv4,
-    unique: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  director: {
+  title: {
     type: String,
     required: true,
   },
@@ -26,7 +17,7 @@ const productScheme = new mongoose.Schema<IProduct>({
     required: true,
   },
   rating: {
-    type: [Number],
+    type: Number,
     required: true,
   },
   tags: {

@@ -27,12 +27,17 @@ export class ProductController {
   updateProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const props: Partial<IProduct> = req.body;
-      const { code } = req.params;
+      const { id } = req.params; // Supondo que o ID do produto é passado como parâmetro
 
-      const updatedProduct = await productRepository.updateProduct(props, code);
-      res.status(200).json({
-        message: `Produto: ${updatedProduct.name} - ${updatedProduct.code} foi atualizado!`,
-      });
+      const updatedProduct = await productRepository.updateProduct(props, id);
+      if (updatedProduct) {
+        res.status(200).json({
+          message: `Produto: ${updatedProduct.title} foi atualizado!`,
+          product: updatedProduct,
+        });
+      } else {
+        res.status(404).json({ message: "Produto não encontrado." });
+      }
     } catch (error) {
       next(error);
     }
@@ -40,11 +45,15 @@ export class ProductController {
 
   deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { code } = req.params;
-      const deletedProduct = await productRepository.deleteProduct(code);
-      res.status(200).json({
-        message: `Produto: ${deletedProduct.name} - ${deletedProduct.code} deletado!`,
-      });
+      const { id } = req.params; // Supondo que o ID do produto é passado como parâmetro
+      const deletedProduct = await productRepository.deleteProduct(id);
+      if (deletedProduct) {
+        res.status(200).json({
+          message: `Produto: ${deletedProduct.title} deletado!`,
+        });
+      } else {
+        res.status(404).json({ message: "Produto não encontrado." });
+      }
     } catch (error) {
       next(error);
     }
@@ -52,31 +61,22 @@ export class ProductController {
 
   rateProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { code } = req.params;
+      const { id } = req.params; // Supondo que o ID do produto é passado como parâmetro
       const { rating } = req.body;
 
-      const updatedProduct = await productRepository.rateProduct(code, rating);
-      res
-        .status(200)
-        .json({ message: `Nota ${updatedProduct.rating} adicionada!` });
+      const updatedProduct = await productRepository.rateProduct(id, rating);
+      if (updatedProduct) {
+        res.status(200).json({
+          message: `Nota ${updatedProduct.rating} adicionada!`,
+          product: updatedProduct,
+        });
+      } else {
+        res.status(404).json({ message: "Produto não encontrado." });
+      }
     } catch (error) {
       next(error);
     }
   };
-
-  // getProductsByStore = async (
-  //   req: Request,
-  //   res: Response,
-  //   next: NextFunction
-  // ) => {
-  //   try {
-  //     const { store_id } = req.params; // Get store ID from parameters
-  //     const products = await productRepository.getProductsByStore(store_id);
-  //     res.status(200).json(products);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
 
   deleteAll = async (req: Request, res: Response, next: NextFunction) => {
     try {

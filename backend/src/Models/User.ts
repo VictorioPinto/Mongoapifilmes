@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -12,6 +12,7 @@ const userScheme = new mongoose.Schema<IUser>({
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   senha: {
     type: String,
@@ -21,6 +22,9 @@ const userScheme = new mongoose.Schema<IUser>({
     type: [],
     required: false,
   },
+  products: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: false },
+  ],
 });
 
 export const User = mongoose.model("User", userScheme);

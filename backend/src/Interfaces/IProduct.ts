@@ -1,10 +1,11 @@
+import { Document } from "mongoose";
+
 export interface IProduct extends Document {
-  code: string;
-  name: string;
-  director: string;
+  title: string;
   sinopse: string;
   lancamento: Date;
-  rating: number[];
+  rating: number;
   tags: string[];
   image: string;
+  uuid: string;
 }
