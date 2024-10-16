@@ -44,6 +44,7 @@ export const CreateMovie = () => {
   };
 
   const criar = async (e: React.FormEvent<HTMLFormElement>) => {
+    console.log(titulo, date , imgUrl, tags, sinopse)
     e.preventDefault(); // Impede o envio padrão do formulário
     const res = await fetch(`${apiUrl}/product/create`, {
       method: "POST",
@@ -52,8 +53,8 @@ export const CreateMovie = () => {
       },
       body: JSON.stringify({
         title: titulo,
-        date: date,
-        img: imgUrl,
+        lancamento: date,
+        image: imgUrl,
         tags: tags,
         sinopse: sinopse,
       }),
@@ -64,13 +65,14 @@ export const CreateMovie = () => {
         setProduct({
           product_id: data.product._id,
           title: titulo,
-          date: date,
-          img: imgUrl,
+          lancamento: date,
+          image: imgUrl,
           tags: tags,
           sinopse: sinopse,
         })
       );
     }
+    alert(data.message)
   };
 
   const fetchGeneros = async () => {
