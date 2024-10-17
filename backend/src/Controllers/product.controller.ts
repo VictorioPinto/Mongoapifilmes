@@ -16,10 +16,14 @@ export class ProductController {
 
   createProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const product: IProduct = req.body;
+      const product: IProduct = {
+        ...req.body,
+      };
+
       const insertedProduct = await productRepository.createProduct(product);
       res.status(201).json(insertedProduct);
     } catch (error) {
+      console.error("Erro ao criar produto:", error); // Log do erro para depuração
       next(error);
     }
   };

@@ -9,17 +9,26 @@ export class ProductRepository {
   };
 
   // Create a new product
-  createProduct = async (product: Partial<IProduct>): Promise<IProduct> => {
-    const newProduct = new Product({
-      title: product.title,
-      sinopse: product.sinopse,
-      lancamento: product.lancamento,
-      rating: product.rating || 0, 
-      tags: product.tags,
-      image: product.image,
-    });
 
-    return await newProduct.save();
+  createProduct = async (product: Partial<IProduct>): Promise<IProduct> => {
+    try {
+      const newProduct = new Product({
+        title: product.title,
+        sinopse: product.sinopse,
+        lancamento: product.lancamento,
+        rating: product.rating || 0,
+        tags: product.tags,
+        image: product.image,
+      });
+
+      return await newProduct.save();
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new BadRequestError(`Erro ao criar produto: ${error.message}`);
+      } else {
+        throw new BadRequestError("Erro desconhecido ao criar produto.");
+      }
+    }
   };
 
   // Update an existing product
@@ -32,7 +41,7 @@ export class ProductRepository {
     const updatedProduct = await Product.findByIdAndUpdate(
       productId,
       {
-        ...product, 
+        ...product,
       },
       {
         new: true,
@@ -51,7 +60,7 @@ export class ProductRepository {
 
     if (!product) throw new BadRequestError("Produto não encontrado!");
 
-    product.rating = rate; 
+    product.rating = rate;
 
     return await product.save();
   };

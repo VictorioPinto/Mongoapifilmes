@@ -10,6 +10,7 @@ const initialState = {
   tags: [],
   rating: "",
 };
+  
 export const productSlice = createSlice({
   name: "product",
   initialState,
@@ -18,9 +19,9 @@ export const productSlice = createSlice({
       return {
         ...state,
         product_id: payload.product_id,
-        title: payload.titulo,
-        date: payload.date,
-        img: payload.img,
+        title: payload.title, // Changed from payload.titulo
+        date: payload.lancamento, // Changed from payload.date
+        img: payload.image, // Changed from payload.img
         sinopse: payload.sinopse,
         tags: payload.tags,
         rating: payload.rating,
@@ -32,5 +33,6 @@ export const productSlice = createSlice({
     },
   },
 });
+
 export const { setProduct } = productSlice.actions;
 export const userSelector = (state: RootState) => state.user;

@@ -86,16 +86,16 @@ const FilmesList: React.FC = () => {
         </CardVazio>
         {filmesdb.map((filmedb) => (
           <CardFilmes
-            key={filme.code}
-            code={filme.code}
-            name={filme.name}
-            director={filme.director}
-            sinopse={filme.sinopse}
-            lancamento={filme.lancamento}
-            rating={filme.rating}
-            tags={filme.tags}
+            key={filmedb.code}
+            code={filmedb.code}
+            name={filmedb.name}
+            director={filmedb.director}
+            sinopse={filmedb.sinopse}
+            lancamento={filmedb.lancamento}
+            rating={filmedb.rating}
+            tags={filmedb.tags}
             generos={generos}
-            image={filme.image}
+            image={filmedb.image}
           />
         ))}
       </FilmeList>

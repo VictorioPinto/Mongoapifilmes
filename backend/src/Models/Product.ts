@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
-
 import { v4 as uuidv4 } from "uuid";
 import { IProduct } from "../Interfaces/IProduct";
 
 const productScheme = new mongoose.Schema<IProduct>({
+  uuid: {
+    type: String,
+    default: uuidv4, // Gerar UUID automaticamente
+    unique: true, // Certifique-se de que é único
+  },
   title: {
     type: String,
     required: true,

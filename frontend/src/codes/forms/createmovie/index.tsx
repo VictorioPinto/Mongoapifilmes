@@ -44,36 +44,41 @@ export const CreateMovie = () => {
   };
 
   const criar = async (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(titulo, date , imgUrl, tags, sinopse)
-    e.preventDefault(); // Impede o envio padrão do formulário
-    const res = await fetch(`${apiUrl}/product/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+  e.preventDefault(); // Impede o envio padrão do formulário
+  
+  const res = await fetch(`${apiUrl}/product/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: titulo,
+      lancamento: date,
+      image: imgUrl,
+      tags: tags,
+      sinopse: sinopse,
+    }),
+  });
+  
+  const data = await res.json();
+
+  if (res.ok) { // Verifica se a resposta foi bem-sucedida
+    dispatch(
+      setProduct({
+        product_id: data.product._id, // Certifique-se que `data.product` existe
         title: titulo,
         lancamento: date,
         image: imgUrl,
         tags: tags,
         sinopse: sinopse,
-      }),
-    });
-    const data = await res.json();
-    if (res.status === 201) {
-      dispatch(
-        setProduct({
-          product_id: data.product._id,
-          title: titulo,
-          lancamento: date,
-          image: imgUrl,
-          tags: tags,
-          sinopse: sinopse,
-        })
-      );
-    }
-    alert(data.message)
-  };
+      })
+    );
+  } else {
+    console.error("Erro ao criar produto:", data); // Log do erro
+    alert(`Erro: ${data.message || "Não foi possível criar o filme."}`);
+  }
+};
+
 
   const fetchGeneros = async () => {
     try {
